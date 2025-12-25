@@ -31,20 +31,64 @@ async function run() {
 // console.log(createdProfile);
 
 // retrive all user
-const users = await prisma.user.findMany({
-    // include:{
-    //     posts: true,
-    //     profile: true
-    // }
-    select: {
-        id: true,
-        name: true,
-        email: true,
+// const users = await prisma.user.findMany({
+//     // include:{
+//     //     posts: true,
+//     //     profile: true
+//     // }
+//     select: {
+//         id: true,
+//         name: true,
+//         email: true,
+//         posts: true,
+//         profile: true
+//     }
+// });
+// console.dir(users, { depth: Infinity });
+
+// update user data
+// const updateUser = await prisma.profile.update({
+//     where: {
+//         userId: 1
+//     },
+//     data: {
+//         bio: "Web Developer & Mentor",
+//         dateOfBirth: "2025-12-23T14:23:05.455Z"
+//     },
+//     select: {
+//         id: true,
+//         bio: true,
+//         user: {
+//             select: {
+//                 name: true,
+//                 email: true
+//             }
+//         }
+//     }
+// })
+// console.log("updated user: ", updateUser);
+
+// delete user
+// const deleteUser = await prisma.user.delete({
+//     where: {
+//         id: 2
+//     }
+// })
+
+// console.log(deleteUser);
+
+// get user data by id
+const getUserDataById = await prisma.user.findUnique({
+    where: {
+        id: 2
+    },
+    include:  {
         posts: true,
         profile: true
     }
-});
-console.dir(users, { depth: Infinity });
+})
+
+console.log(getUserDataById);
 }
 
 run()
